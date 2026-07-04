@@ -48,7 +48,7 @@ function parseHtml(html: string): ParsedMeta {
       const text = el.textContent || '';
       JSON.parse(text);
       schemas.push(text);
-    } catch {}
+    } catch { /* skip invalid JSON-LD */ }
   });
 
   const lang = doc.documentElement.getAttribute('lang') || '';
@@ -232,7 +232,7 @@ function SchemaBlock({ schemas }: { schemas: string[] }) {
       <div className="flex flex-wrap gap-2">
         {schemas.map((s, i) => {
           let type = 'Schema';
-          try { const p = JSON.parse(s); type = p['@type'] || p['@context'] || `#${i+1}`; } catch {}
+          try { const p = JSON.parse(s); type = p['@type'] || p['@context'] || `#${i+1}`; } catch { /* keep default label */ }
           return (
             <button
               key={i}

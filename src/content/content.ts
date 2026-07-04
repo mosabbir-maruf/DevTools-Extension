@@ -1,4 +1,4 @@
-import { Rect } from '../types';
+import { Rect, FontInfo } from '../types';
 
 (() => {
   // Prevent double-initialization of event listeners
@@ -375,7 +375,7 @@ import { Rect } from '../types';
     }
   }
 
-  function showFontDetailsPanel(font: any) {
+  function showFontDetailsPanel(font: FontInfo) {
     if (fontDetailPanel) {
       fontDetailPanel.remove();
     }
@@ -527,9 +527,9 @@ import { Rect } from '../types';
   function hexToHsl(hex: string): string {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!result) return 'hsl(0, 0%, 0%)';
-    let r = parseInt(result[1], 16) / 255;
-    let g = parseInt(result[2], 16) / 255;
-    let b = parseInt(result[3], 16) / 255;
+    const r = parseInt(result[1], 16) / 255;
+    const g = parseInt(result[2], 16) / 255;
+    const b = parseInt(result[3], 16) / 255;
 
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
@@ -609,7 +609,7 @@ import { Rect } from '../types';
       if (icons[k] && !icons[k].startsWith('http') && !icons[k].startsWith('data:')) {
         try {
           icons[k] = new URL(icons[k], window.location.href).href;
-        } catch (e) {}
+        } catch { /* ignore invalid URL */ }
       }
     }
 
@@ -623,7 +623,7 @@ import { Rect } from '../types';
         if (!href.startsWith('http') && !href.startsWith('data:')) {
           try {
             absHref = new URL(href, window.location.href).href;
-          } catch (e) {}
+          } catch { /* ignore */ }
         }
         alternates.push({ hreflang, href: absHref });
       }
@@ -645,11 +645,11 @@ import { Rect } from '../types';
     if (pwa.manifest && !pwa.manifest.startsWith('http') && !pwa.manifest.startsWith('data:')) {
       try {
         pwa.manifest = new URL(pwa.manifest, window.location.href).href;
-      } catch (e) {}
+      } catch { /* ignore */ }
     }
 
     const scripts = document.querySelectorAll('script[type="application/ld+json"]');
-    const structuredData: any[] = [];
+    const structuredData: Record<string, unknown>[] = [];
     scripts.forEach(script => {
       try {
         const txt = script.textContent?.trim();
@@ -659,7 +659,7 @@ import { Rect } from '../types';
             structuredData.push(parsed);
           }
         }
-      } catch (e) {}
+      } catch { /* ignore */ }
     });
 
     return {
@@ -709,7 +709,10 @@ import { Rect } from '../types';
         (async () => {
           try {
             if ('EyeDropper' in window) {
-              const eyeDropper = new (window as any).EyeDropper();
+              const EyeDropperCtor = (window as unknown as {
+                EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> };
+              }).EyeDropper;
+              const eyeDropper = new EyeDropperCtor();
               const result = await eyeDropper.open();
               const hex = result.sRGBHex;
 

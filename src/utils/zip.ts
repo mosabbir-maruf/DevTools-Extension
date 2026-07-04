@@ -101,7 +101,7 @@ export async function createZip(files: { name: string; blob: Blob }[]): Promise<
   }
 
   // Calculate central directory details
-  let cdOffset = currentOffset;
+  const cdOffset = currentOffset;
   let cdSize = 0;
   for (const cdh of centralDirectoryHeaders) {
     parts.push(cdh);
@@ -123,5 +123,5 @@ export async function createZip(files: { name: string; blob: Blob }[]): Promise<
 
   parts.push(eocd);
 
-  return new Blob(parts as any[], { type: 'application/zip' });
+  return new Blob(parts as BlobPart[], { type: 'application/zip' });
 }

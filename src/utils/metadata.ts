@@ -284,7 +284,7 @@ function readTiffTagValue(
   inlineOffset: number,
   valueOffset: number,
   isLittleEndian: boolean
-): any {
+): string | number | number[] | null {
   // Types: 1=BYTE, 2=ASCII, 3=SHORT, 4=LONG, 5=RATIONAL, 7=UNDEFINED, 9=SLONG, 10=SRATIONAL
   const sizeMap: Record<number, number> = { 1: 1, 2: 1, 3: 2, 4: 4, 5: 8, 7: 1, 9: 4, 10: 8 };
   const typeSize = sizeMap[type] || 1;

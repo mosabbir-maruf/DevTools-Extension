@@ -145,5 +145,5 @@ export interface MetadataPayload {
     themeColor: string;
     backgroundColor: string;
   };
-  structuredData: any[];
+  structuredData: Record<string, unknown>[];
 }

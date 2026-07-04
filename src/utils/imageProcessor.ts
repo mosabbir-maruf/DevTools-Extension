@@ -42,8 +42,8 @@ export async function processImage(
   }
 
   // Determine post-crop canvas size
-  let dw = imageFile.targetWidth;
-  let dh = imageFile.targetHeight;
+  const dw = imageFile.targetWidth;
+  const dh = imageFile.targetHeight;
 
   // Swap target dimensions if rotated 90 or 270 degrees
   const isRotated90or270 = imageFile.rotation === 90 || imageFile.rotation === 270;

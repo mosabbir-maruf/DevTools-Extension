@@ -10,9 +10,9 @@ function hexToRgb(hex: string): string {
 function hexToHsl(hex: string): string {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) return 'hsl(0, 0%, 0%)';
-  let r = parseInt(result[1], 16) / 255;
-  let g = parseInt(result[2], 16) / 255;
-  let b = parseInt(result[3], 16) / 255;
+  const r = parseInt(result[1], 16) / 255;
+  const g = parseInt(result[2], 16) / 255;
+  const b = parseInt(result[3], 16) / 255;
 
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
@@ -37,7 +37,7 @@ async function ensureContentScriptInjected(tabId: number): Promise<boolean> {
   try {
     await chrome.tabs.sendMessage(tabId, { type: 'PING' });
     return true;
-  } catch (err) {
+  } catch {
     try {
       await chrome.scripting.executeScript({
         target: { tabId },
@@ -67,11 +67,7 @@ export default function ColorPicker() {
       }
     });
 
-    const handleMessage = (
-      message: { type: string; color?: ColorInfo },
-      _sender: chrome.runtime.MessageSender,
-      _sendResponse: (response?: unknown) => void
-    ) => {
+    const handleMessage = (message: { type: string; color?: ColorInfo }) => {
       if (message.type === 'ADD_COLOR_HISTORY' && message.color) {
         setCurrentColor(message.color);
         setCopiedFormat('HEX');
@@ -120,7 +116,10 @@ export default function ColorPicker() {
     // First, try running EyeDropper directly in the popup context where the user gesture is present
     if ('EyeDropper' in window) {
       try {
-        const eyeDropper = new (window as any).EyeDropper();
+        const EyeDropperCtor = (window as unknown as {
+          EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> };
+        }).EyeDropper;
+        const eyeDropper = new EyeDropperCtor();
         const result = await eyeDropper.open();
         if (result?.sRGBHex) {
           // Copy selected hex directly to clipboard immediately

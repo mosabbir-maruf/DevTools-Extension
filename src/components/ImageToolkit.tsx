@@ -108,7 +108,7 @@ export default function ImageToolkit() {
         console.error('Failed to load image file dimensions:', err);
       }
 
-      let initialFormat: any = 'png';
+      let initialFormat: 'png' | 'jpeg' | 'webp' | 'bmp' | 'ico' | 'gif' | 'svg' = 'png';
       if (file.type === 'image/jpeg' || file.type === 'image/jpg') initialFormat = 'jpeg';
       else if (file.type === 'image/webp') initialFormat = 'webp';
       else if (file.type === 'image/svg+xml') initialFormat = 'svg';
@@ -159,6 +159,7 @@ export default function ImageToolkit() {
       setParsedMeta(null);
       setCropRect(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId, activeSubTab, selectedImage?.id]);
 
   // Handle clicking outside dropdowns
@@ -499,7 +500,7 @@ export default function ImageToolkit() {
       return;
     }
 
-    let raf = requestAnimationFrame(measureCropLayout);
+    const raf = requestAnimationFrame(measureCropLayout);
     const onResize = () => measureCropLayout();
     window.addEventListener('resize', onResize);
 
@@ -514,6 +515,7 @@ export default function ImageToolkit() {
       window.removeEventListener('resize', onResize);
       observer?.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSubTab, selectedImage?.id, selectedImage?.previewUrl, measureCropLayout]);
 
   // Ensure a crop rectangle exists whenever the crop tool is active so the
@@ -531,6 +533,7 @@ export default function ImageToolkit() {
         height,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSubTab, selectedImage?.id, cropRect]);
 
   const applyCrop = () => {
@@ -622,7 +625,7 @@ export default function ImageToolkit() {
                   key={opt.value}
                   type="button"
                   onClick={() => {
-                    updateSelected('targetFormat', opt.value as any);
+                    updateSelected('targetFormat', opt.value as 'png' | 'jpeg' | 'webp' | 'bmp' | 'ico' | 'gif' | 'svg');
                     setIsFormatDropdownOpen(false);
                   }}
                   className={`w-full text-left px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-wider transition-colors

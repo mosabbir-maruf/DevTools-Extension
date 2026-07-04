@@ -6,7 +6,7 @@ async function ensureContentScriptInjected(tabId: number): Promise<boolean> {
     // Send a ping to check if content script is loaded
     await chrome.tabs.sendMessage(tabId, { type: 'PING' });
     return true;
-  } catch (err) {
+  } catch {
     // Content script not loaded, inject it
     try {
       await chrome.scripting.executeScript({
@@ -38,11 +38,7 @@ export default function FontDetector() {
       }
     });
 
-    const handleMessage = (
-      message: { type: string; data?: FontInfo },
-      _sender: chrome.runtime.MessageSender,
-      _sendResponse: (response?: unknown) => void
-    ) => {
+    const handleMessage = (message: { type: string; data?: FontInfo }) => {
       if (message.type === 'FONT_DETECTED' && message.data) {
         setCurrentFont(message.data);
         // Refresh local history list from background state

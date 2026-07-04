@@ -6,7 +6,7 @@ async function ensureContentScriptInjected(tabId: number): Promise<boolean> {
   try {
     await chrome.tabs.sendMessage(tabId, { type: 'PING' });
     return true;
-  } catch (err) {
+  } catch {
     try {
       await chrome.scripting.executeScript({
         target: { tabId },
