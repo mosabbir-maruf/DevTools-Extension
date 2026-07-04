@@ -538,11 +538,102 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Bottom CTA Section */}
+      {/* 4. Maker — Open Source panel */}
+      <section className="space-y-12">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div className="space-y-3 max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/5 border border-accent/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="text-accent-ink font-mono text-[10px] tracking-[0.2em] uppercase font-semibold">Open Source</span>
+            </div>
+            <h3 className="text-3xl sm:text-4xl font-light tracking-tight text-text-primary">Built in the open</h3>
+            <p className="text-sm text-text-secondary leading-relaxed">
+              A free, MIT-licensed project maintained by one developer — with community contributions welcome.
+            </p>
+          </div>
+          <span className="hidden sm:block text-[10px] font-mono uppercase tracking-widest text-text-tertiary shrink-0">The Maker</span>
+        </div>
+
+        <div className="relative overflow-hidden rounded-3xl border border-border-subtle bg-bg-secondary">
+          {/* ambient glow */}
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-accent/10 blur-[120px] rounded-full pointer-events-none" />
+          {/* corner ticks */}
+          <span className="absolute top-4 left-4 w-2 h-2 border-t border-l border-border-default" />
+          <span className="absolute top-4 right-4 w-2 h-2 border-t border-r border-border-default" />
+          <span className="absolute bottom-4 left-4 w-2 h-2 border-b border-l border-border-default" />
+          <span className="absolute bottom-4 right-4 w-2 h-2 border-b border-r border-border-default" />
+
+          <div className="relative z-10 p-8 sm:p-12 lg:p-14">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+
+              {/* Maker identity */}
+              <div className="flex items-center gap-5">
+                <div className="relative shrink-0">
+                  <img
+                    src="/mosabbir-maruf.webp"
+                    alt="Mosabbir Maruf"
+                    loading="lazy"
+                    className="w-16 h-16 rounded-2xl object-cover border border-border-default"
+                  />
+                  <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-bg-secondary flex items-center justify-center" title="Verified">
+                    <svg viewBox="0 0 24 24" className="w-5 h-5" aria-label="Verified">
+                      <path fill="#1d9bf0" d="M12 2.5l2.36 1.7 2.9-.02 1.68 2.36 2.86.65-.02 2.9.65 2.86-2.36 1.68-.02 2.9-2.9-.02L14.36 22 12 20.3 9.64 22l-1.68-2.36-2.9.02-.02-2.9-2.36-1.68.65-2.86-.02-2.9 2.86-.65L7.28 4.18l2.9.02z"/>
+                      <path fill="#fff" d="M10.6 14.6l-2.2-2.2-1.2 1.2 3.4 3.4 6-6-1.2-1.2z"/>
+                    </svg>
+                  </span>
+                </div>
+                <div className="space-y-1.5">
+                  <span className="text-[10px] font-mono font-bold text-text-tertiary uppercase tracking-[0.2em]">Designed &amp; built by</span>
+                  <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-text-primary leading-none">Mosabbir Maruf</h2>
+                  <a
+                    href="https://github.com/mosabbir-maruf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[13px] font-mono text-text-secondary hover:text-accent-ink transition-colors"
+                  >
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    @mosabbir-maruf
+                  </a>
+                </div>
+              </div>
+
+              {/* divider */}
+              <div className="hidden lg:block w-px self-stretch bg-border-subtle" />
+
+              {/* Closing note + actions */}
+              <div className="lg:max-w-sm space-y-5">
+                <p className="text-[14px] text-text-secondary leading-relaxed">
+                  DevTools is an open-source project, free forever. Contributions, bug reports, and feature
+                  ideas are always welcome.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="https://github.com/mosabbir-maruf/FullScreenShot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-6 py-3 bg-accent text-on-accent rounded-full font-semibold hover:bg-accent-dim hover:scale-[1.02] active:scale-95 transition-all duration-200 text-[13px]"
+                  >
+                    Install From GitHub
+                  </a>
+                  <a
+                    href="/guide"
+                    className="inline-flex items-center justify-center px-6 py-3 bg-bg-base text-text-primary rounded-full font-medium hover:bg-bg-tertiary hover:scale-[1.02] active:scale-95 transition-all duration-200 text-[13px] border border-border-default"
+                  >
+                    Read the Guide
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Bottom CTA Section */}
       <section className="bg-bg-secondary border border-border-subtle rounded-3xl p-10 sm:p-16 text-center space-y-8 shadow-panel relative overflow-hidden">
         {/* Subtle background glow effect */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
-        
+
         <div className="relative z-10 space-y-4">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-text-primary">Ready to upgrade your workflow?</h2>
           <p className="text-sm text-text-secondary max-w-md mx-auto">
