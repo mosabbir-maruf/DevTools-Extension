@@ -91,8 +91,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid input.', fields });
   }
 
+  // Capture the originating site so we know where the message came from.
+  const siteUrl = String(req.headers['origin'] || req.headers['referer'] || 'unknown').trim();
+
   const text =
     '<b>📨 New DevTools contact</b>\n\n' +
+    `<b>Message From:</b> ${escapeHtml(siteUrl)}\n\n` +
     `<b>Name:</b> ${escapeHtml(cleanName)}\n` +
     `<b>Email:</b> ${escapeHtml(cleanEmail)}\n` +
     `<b>Topic:</b> ${escapeHtml(cleanTopic)}\n\n` +
