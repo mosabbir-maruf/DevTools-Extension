@@ -1,27 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FontInfo } from '../types';
-
-async function ensureContentScriptInjected(tabId: number): Promise<boolean> {
-  try {
-    // Send a ping to check if content script is loaded
-    await chrome.tabs.sendMessage(tabId, { type: 'PING' });
-    return true;
-  } catch {
-    // Content script not loaded, inject it
-    try {
-      await chrome.scripting.executeScript({
-        target: { tabId },
-        files: ['content.js'],
-      });
-      // Settle a bit
-      await new Promise(resolve => setTimeout(resolve, 100));
-      return true;
-    } catch (injectErr) {
-      console.error('Failed to inject content script:', injectErr);
-      return false;
-    }
-  }
-}
+import { ensureContentScriptInjected } from '../utils/contentScript';
 
 export default function FontDetector() {
   const [isDetecting, setIsDetecting] = useState(false);

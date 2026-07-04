@@ -134,7 +134,6 @@ export default function ImageToolkit() {
         convertedBlob: null,
         convertedSize: null,
         status: 'pending',
-        metadata: null,
       });
     }
 

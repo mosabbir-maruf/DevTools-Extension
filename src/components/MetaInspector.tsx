@@ -1,25 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { MetadataPayload } from '../types';
-
-async function ensureContentScriptInjected(tabId: number): Promise<boolean> {
-  try {
-    await chrome.tabs.sendMessage(tabId, { type: 'PING' });
-    return true;
-  } catch {
-    try {
-      await chrome.scripting.executeScript({
-        target: { tabId },
-        files: ['content.js'],
-      });
-      await new Promise(resolve => setTimeout(resolve, 100));
-      return true;
-    } catch (injectErr) {
-      console.error('Failed to inject content script:', injectErr);
-      return false;
-    }
-  }
-}
+import { ensureContentScriptInjected } from '../utils/contentScript';
 
 interface ValidationWarning {
   field: string;

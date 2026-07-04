@@ -216,7 +216,7 @@ async function captureFullPage(tabId: number, windowId: number, options: Capture
           (el as HTMLElement).style.visibility = 'hidden';
         }
       });
-      const w = window as unknown as unknown as Record<string, unknown>;
+      const w = window as unknown as Record<string, unknown>;
       w.__fixedHidden = fixed;
       // Pre-scroll to very top with instant behavior to start clean
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });

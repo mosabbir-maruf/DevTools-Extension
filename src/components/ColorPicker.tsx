@@ -1,6 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ColorInfo } from '../types';
+import { ensureContentScriptInjected } from '../utils/contentScript';
 
+// Color helpers are kept local rather than shared with the content script:
+// the content script loads as a classic (non-module) script and cannot import
+// an ES module, so a shared util would be split into a chunk it can't load.
 function hexToRgb(hex: string): string {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) return 'rgb(0, 0, 0)';
@@ -31,25 +35,6 @@ function hexToHsl(hex: string): string {
   }
 
   return `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
-}
-
-async function ensureContentScriptInjected(tabId: number): Promise<boolean> {
-  try {
-    await chrome.tabs.sendMessage(tabId, { type: 'PING' });
-    return true;
-  } catch {
-    try {
-      await chrome.scripting.executeScript({
-        target: { tabId },
-        files: ['content.js'],
-      });
-      await new Promise(resolve => setTimeout(resolve, 100));
-      return true;
-    } catch (injectErr) {
-      console.error('Failed to inject content script:', injectErr);
-      return false;
-    }
-  }
 }
 
 export default function ColorPicker() {

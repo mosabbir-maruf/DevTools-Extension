@@ -185,13 +185,6 @@ input[type="number"]::-webkit-outer-spin-button { opacity: 0.4; }
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
-.scrollbar-hide {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
@@ -209,30 +202,6 @@ input[type="number"]::-webkit-outer-spin-button { opacity: 0.4; }
 
 .animate-fade-in  { animation: fadeIn  0.15s ease-out both; }
 .animate-slide-up { animation: slideUp 0.2s  ease-out both; }
-
-/* ─── Checkerboard Pattern ─────────────────────────────── */
-.bg-checkerboard {
-  background-color: #060606;
-  background-image: 
-    linear-gradient(45deg, #121212 25%, transparent 25%), 
-    linear-gradient(-45deg, #121212 25%, transparent 25%), 
-    linear-gradient(45deg, transparent 75%, #121212 75%), 
-    linear-gradient(-45deg, transparent 75%, #121212 75%);
-  background-size: 16px 16px;
-  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
-}
-
-/* ─── Premium Glassmorphic Surfaces ───────────────────────── */
-.glass-panel {
-  background: rgba(16, 16, 16, 0.55) !important;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.04) !important;
-}
-.glass-card {
-  background: rgba(25, 25, 25, 0.25) !important;
-  border: 1px solid rgba(255, 255, 255, 0.03) !important;
-}
 
 /* ─── Premium Customized Range Sliders ─────────────────────── */
 input[type="range"].accent-accent {

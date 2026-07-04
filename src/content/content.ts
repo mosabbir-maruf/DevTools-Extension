@@ -517,6 +517,9 @@ import { Rect, FontInfo } from '../types';
   }
 
   // ── Color Helpers ─────────────────────────────────────
+  // Kept local: the content script is loaded as a classic (non-module) script,
+  // so it cannot import a shared ES module without breaking. These mirror
+  // src/utils/color.ts, which serves the popup bundle.
 
   function hexToRgb(hex: string): string {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

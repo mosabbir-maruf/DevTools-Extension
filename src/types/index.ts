@@ -26,7 +26,6 @@ export interface ImageFile {
   convertedSize: number | null;
   status: 'pending' | 'processing' | 'done' | 'error';
   error?: string;
-  metadata: Record<string, string> | null;
   bgOpacity?: number;
 }
 
